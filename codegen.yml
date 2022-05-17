@@ -1,9 +1,13 @@
 overwrite: true
 schema: "https://api.github.com/graphql"
-documents: "./src/components/**/*.{ts,tsx}"
+headers: 
+    Authorization: "Bearer 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"
+documents: "./src/queries/**/*.{ts,tsx}"
 generates:
   src/generated/graphql.tsx:
     plugins:
       - "typescript"
       - "typescript-operations"
       - "typescript-react-apollo"
+    config: 
+      withHooks: true
