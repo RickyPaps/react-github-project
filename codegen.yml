@@ -1,7 +1,7 @@
 overwrite: true
 schema: "https://api.github.com/graphql"
-headers: 
-    Authorization: "Bearer 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"
+headers:
+  Authorization: "Bearer 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"
 documents: "./src/queries/**/*.{ts,tsx}"
 generates:
   src/generated/graphql.tsx:
@@ -9,5 +9,6 @@ generates:
       - "typescript"
       - "typescript-operations"
       - "typescript-react-apollo"
-    config: 
+      -  schema-ast
+    config:
       withHooks: true
