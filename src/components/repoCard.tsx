@@ -1,11 +1,27 @@
-import { Card, Image, Text, Badge, Button, Group, useMantineTheme } from '@mantine/core';
+import * as React from "react";
+import {
+  Card,
+  Image,
+  Text,
+  Badge,
+  Button,
+  Group,
+  useMantineTheme,
+} from "@mantine/core";
+import { QueryRepoQuery } from "../generated/graphql";
 
-
-
-const repoCard = () => {
-
-
-
+interface QueryProps {
+  data: QueryRepoQuery;
 }
 
-export default repoCard
+const className = "LaunchList";
+
+export const RepoCard: React.FC<QueryProps> = ({ data }) => {
+  console.log(data);
+  return (
+    <div className={className}>
+      <h3>Launches</h3>
+      <ol className={`${className}__list`}>logic here</ol>
+    </div>
+  );
+};
