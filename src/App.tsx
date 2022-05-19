@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.scss";
 import { useQueryRepoQuery } from "./generated/graphql";
@@ -10,11 +11,10 @@ const App = () => {
       after: null,
       before: null,
     },
-    notifyOnNetworkStatusChange: true
+    notifyOnNetworkStatusChange: true,
   });
 
   const handleNextPage = (obj: any) => {
-    debugger;
     refetch({
       after: obj.currentCursors.after,
       before: obj.currentCursors.before,
@@ -26,11 +26,11 @@ const App = () => {
   }
 
   return (
-    <div className="App">
+    <div className="app">
       <LoadingOverlay styles={{ position: "fixed" }} visible={loading} />
       {data && (
-        <div className="App-wrapper">
-          <img src={logo} className="App-logo" alt="logo" />
+        <div className="app-wrapper">
+          <img src={logo} className="app-logo" alt="logo" />
           <RepoCard nextPage={handleNextPage} data={data} />
         </div>
       )}

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Card, createStyles, Text, Badge, Button, Group } from "@mantine/core";
 import { QueryRepoQuery } from "../generated/graphql";
 import { Pagination } from "./Pagination";
-// import { SearchResultItemConnection } from "../types/QueryRepoType";
 
 interface QueryProps {
   data: QueryRepoQuery;
@@ -16,6 +15,11 @@ interface QueryDataProps {
 }
 
 const useStyles = createStyles(() => ({
+  repoWrapper: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
   repoCardWrapper: {
     display: "flex",
     flexWrap: "wrap",
@@ -102,60 +106,34 @@ const RepoCardItem = (props: QueryDataProps) => {
 
 export const RepoCard: React.FC<QueryProps> = ({ data, nextPage }) => {
   const styles = useStyles();
-  const [activePage, setPage] = useState(1);
   const [startCursor, setstartCursor] = useState<any>();
   const [endCursor, setEndCursor] = useState<any>();
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalIssues, settotalIssues] = useState<number>(0);
   const [IssueFilter, setIssueFilter] = useState<String>("OPEN");
 
   useEffect(() => {
-    if (data.repository && data.repository) {
+    if (data && data.repository) {
       settotalIssues(data.repository.open_issues.totalCount);
     }
-  }, [data]);
-
-  useEffect(() => {
     setstartCursor(data.search.pageInfo.startCursor);
     setEndCursor(data.search.pageInfo.endCursor);
   }, [data]);
 
-  // useEffect(() => {
-  //   // console.log(activePage);
-  //   // debugger;
-  //   // setCurrentPage(activePage);
-  //   // const newPages = {
-  //   //   after: null,
-  //   //   before: null,
-  //   // };
-  //   // if (activePage < currentPage) {
-  //   //   newPages.before = startCursor;
-  //   //   newPages.after = null;
-  //   //   nextPage({ currentCursors: newPages });
-  //   // }
-  //   // if (activePage > currentPage) {
-  //   //   newPages.before = null;
-  //   //   newPages.after = endCursor;
-  //   //   nextPage({ currentCursors: newPages });
-  //   // }
-  // }, [activePage]);
-
   return (
-    <div className={styles.classes.repoCardWrapper}>
-      <RepoCardItem
-        className="repoCard"
-        searchItems={data.search.edges}
-        styles={styles}
-      />
-      {/* <Pagination
-        page={activePage}
-        onChange={setPage}
-        total={Math.round(totalIssues / 10)}
-      /> */}
+    <div className={styles.classes.repoWrapper}>
+      <div className={styles.classes.repoCardWrapper}>
+        <RepoCardItem
+          className="repoCard"
+          searchItems={data.search.edges}
+          styles={styles}
+        />
+      </div>
       <Pagination
         startCursor={startCursor}
         endCursor={endCursor}
         nextPage={nextPage}
+        hasNext={data.search.pageInfo.hasNextPage}
+        hasPrevious={data.search.pageInfo.hasPreviousPage}
       />
     </div>
   );

@@ -2808,7 +2808,7 @@ export type CreateBranchProtectionRuleInput = {
   isAdminEnforced?: InputMaybe<Scalars['Boolean']>;
   /** The glob-like pattern used to determine matching branches. */
   pattern: Scalars['String'];
-  /** A list of User, Team or App IDs allowed to push to matching branches. */
+  /** A list of User, Team, or App IDs allowed to push to matching branches. */
   pushActorIds?: InputMaybe<Array<Scalars['ID']>>;
   /** The global relay id of the repository in which a new branch protection rule should be created in. */
   repositoryId: Scalars['ID'];
@@ -21717,7 +21717,7 @@ export type UpdateBranchProtectionRuleInput = {
   isAdminEnforced?: InputMaybe<Scalars['Boolean']>;
   /** The glob-like pattern used to determine matching branches. */
   pattern?: InputMaybe<Scalars['String']>;
-  /** A list of User, Team or App IDs allowed to push to matching branches. */
+  /** A list of User, Team, or App IDs allowed to push to matching branches. */
   pushActorIds?: InputMaybe<Array<Scalars['ID']>>;
   /** Number of approving reviews required to update matching branches. */
   requiredApprovingReviewCount?: InputMaybe<Scalars['Int']>;
@@ -23732,7 +23732,7 @@ export type QueryRepoQueryVariables = Exact<{
 }>;
 
 
-export type QueryRepoQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', pageInfo: { __typename?: 'PageInfo', startCursor?: string | null, endCursor?: string | null }, edges?: Array<{ __typename?: 'SearchResultItemEdge', node?: { __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue', number: number, title: string, createdAt: any, state: IssueState } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename?: 'Repository' } | { __typename?: 'User' } | null } | null> | null }, repository?: { __typename?: 'Repository', open_issues: { __typename?: 'IssueConnection', totalCount: number }, closed_issues: { __typename?: 'IssueConnection', totalCount: number } } | null };
+export type QueryRepoQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', pageInfo: { __typename?: 'PageInfo', startCursor?: string | null, endCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean }, edges?: Array<{ __typename?: 'SearchResultItemEdge', node?: { __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue', number: number, title: string, createdAt: any, state: IssueState } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename?: 'Repository' } | { __typename?: 'User' } | null } | null> | null }, repository?: { __typename?: 'Repository', open_issues: { __typename?: 'IssueConnection', totalCount: number }, closed_issues: { __typename?: 'IssueConnection', totalCount: number } } | null };
 
 export type QueryRepoDetailedQueryVariables = Exact<{
   queryString: Scalars['String'];
@@ -23747,13 +23747,15 @@ export const QueryRepoDocument = gql`
   search(
     query: "repo:reactjs/reactjs.org is:issue is:open"
     type: ISSUE
-    last: 10
+    last: 9
     after: $after
     before: $before
   ) {
     pageInfo {
       startCursor
       endCursor
+      hasNextPage
+      hasPreviousPage
     }
     edges {
       node {

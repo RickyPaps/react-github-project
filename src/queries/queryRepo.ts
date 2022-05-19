@@ -12,6 +12,8 @@ export const QUERY_REPO = gql`
       pageInfo {
         startCursor
         endCursor
+        hasNextPage
+        hasPreviousPage
       }
       edges {
         node {
