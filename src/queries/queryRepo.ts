@@ -5,7 +5,7 @@ export const QUERY_REPO = gql`
     search(
       query: "repo:reactjs/reactjs.org is:issue is:open"
       type: ISSUE
-      last: 10
+      last: 9
       after: $after
       before: $before
     ) {

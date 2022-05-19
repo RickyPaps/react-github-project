@@ -1,35 +1,39 @@
-import * as React from "react";
 import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 import { useQueryRepoQuery } from "./generated/graphql";
 import { RepoCard } from "./components/RepoCard";
+import { LoadingOverlay } from "@mantine/core";
 
 const App = () => {
-  const { data, loading, error } = useQueryRepoQuery({
+  const { data, loading, error, refetch } = useQueryRepoQuery({
     variables: {
       after: null,
       before: null,
     },
+    notifyOnNetworkStatusChange: true
   });
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const handleNextPage = (obj: any) => {
+    debugger;
+    refetch({
+      after: obj.currentCursors.after,
+      before: obj.currentCursors.before,
+    });
+  };
 
   if (error) {
     return <div>ERROR</div>;
   }
 
-  if (!data) {
-    return <div>No data</div>;
-  }
-
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-      <RepoCard data={data} />
+      <LoadingOverlay styles={{ position: "fixed" }} visible={loading} />
+      {data && (
+        <div className="App-wrapper">
+          <img src={logo} className="App-logo" alt="logo" />
+          <RepoCard nextPage={handleNextPage} data={data} />
+        </div>
+      )}
     </div>
   );
 };
