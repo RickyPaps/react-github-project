@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Card, createStyles, Text, Badge, Button, Group } from "@mantine/core";
+import {
+  Card,
+  createStyles,
+  Text,
+  Badge,
+  Button,
+  Group,
+  Skeleton,
+} from "@mantine/core";
 import { QueryRepoQuery } from "../generated/graphql";
 import { Pagination } from "./Pagination";
 
 interface QueryProps {
   data: QueryRepoQuery;
   nextPage: any;
+  isLoading: boolean
 }
 
 interface QueryDataProps {
@@ -76,45 +85,31 @@ const useStyles = createStyles(() => ({
 
 const RepoCardItem = (props: QueryDataProps) => {
   const { searchItems: data, className, styles } = props;
-  const items = data;
+  const item = data.node;
+
   return (
-    items &&
-    items.map((item: any) => {
-      return (
-        <div className={`${props.className} ${props.styles.classes.repoCard}`}>
-          <Card
-            className={props.styles.classes.repoCardContainer}
-            shadow="sm"
-            p="lg"
-          >
-            <Card.Section>{item.node.title}</Card.Section>
-            <Group position="apart">
-              <Text weight={500}>{item.node.title}</Text>
-              <Badge color="pink" variant="light">
-                {item.node.state}
-              </Badge>
-            </Group>
-          </Card>
-          <Button className={props.styles.classes.repoButton}>
-            View Issue
-          </Button>
-        </div>
-      );
-    })
+    <div className={`${className} ${styles.classes.repoCard}`}>
+      <Card className={styles.classes.repoCardContainer} shadow="sm" p="lg">
+        <Card.Section>{item.title}</Card.Section>
+        <Group position="apart">
+          <Text weight={500}>{item.title}</Text>
+          <Text weight={500}>#{item.number}</Text>
+          <Badge color="pink" variant="light">
+            {item.state}
+          </Badge>
+        </Group>
+      </Card>
+      <Button className={styles.classes.repoButton}>View Issue</Button>
+    </div>
   );
 };
 
-export const RepoCard: React.FC<QueryProps> = ({ data, nextPage }) => {
+export const RepoCard: React.FC<QueryProps> = ({ data, nextPage, isLoading }) => {
   const styles = useStyles();
   const [startCursor, setstartCursor] = useState<any>();
   const [endCursor, setEndCursor] = useState<any>();
-  const [totalIssues, settotalIssues] = useState<number>(0);
-  const [IssueFilter, setIssueFilter] = useState<String>("OPEN");
 
   useEffect(() => {
-    if (data && data.repository) {
-      settotalIssues(data.repository.open_issues.totalCount);
-    }
     setstartCursor(data.search.pageInfo.startCursor);
     setEndCursor(data.search.pageInfo.endCursor);
   }, [data]);
@@ -122,11 +117,17 @@ export const RepoCard: React.FC<QueryProps> = ({ data, nextPage }) => {
   return (
     <div className={styles.classes.repoWrapper}>
       <div className={styles.classes.repoCardWrapper}>
-        <RepoCardItem
-          className="repoCard"
-          searchItems={data.search.edges}
-          styles={styles}
-        />
+        {data.search.edges?.map((item) => {
+          return (
+            <Skeleton visible={isLoading} style={{ width: "auto", margin: "10px" }}>
+              <RepoCardItem
+                className="repoCard"
+                searchItems={item}
+                styles={styles}
+              />
+            </Skeleton>
+          );
+        })}
       </div>
       <Pagination
         startCursor={startCursor}

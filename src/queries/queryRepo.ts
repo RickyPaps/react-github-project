@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
 
 export const QUERY_REPO = gql`
-  query QueryRepo($after: String, $before: String) {
+  query QueryRepo($after: String, $before: String, $query: String!) {
     search(
-      query: "repo:reactjs/reactjs.org is:issue is:open"
+      query: $query
       type: ISSUE
       last: 9
       after: $after
