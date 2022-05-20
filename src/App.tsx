@@ -2,9 +2,9 @@ import { useState } from "react";
 import logo from "./logo.svg";
 import "./App.scss";
 import { useQueryRepoQuery } from "./generated/graphql";
-import { RepoCard } from "./components/RepoCard";
-import { LoadingOverlay, Skeleton } from "@mantine/core";
-import { Filters } from "./components/Filters";
+import { RepoCard } from "./components/RepoCard/RepoCard";
+import { LoadingOverlay } from "@mantine/core";
+import { Filters } from "./components/Filter/Filters";
 
 interface filterProps {
   query: string;
@@ -41,23 +41,23 @@ const App = () => {
     });
   };
 
-  // if (error) {
-  //   return <div>ERROR</div>;
-  // }
+  if (error) {
+    return <div>ERROR</div>;
+  }
 
   return (
     <div className="app">
-      <LoadingOverlay styles={{ position: "fixed" }} visible={loading} />
+      <LoadingOverlay
+        overlayOpacity={0.3}
+        style={{ position: "fixed" }}
+        visible={loading}
+      />
       <div className="app-wrapper">
         <img src={logo} className="app-logo" alt="logo" />
+        <Filters data={data} changeFilter={handleFilterChange} />
         {data && (
           <div>
-            <Filters
-              changeFilter={handleFilterChange}
-              openIssues={data.repository?.open_issues.totalCount}
-              closedIssues={data.repository?.closed_issues.totalCount}
-            />
-            <RepoCard nextPage={handleNextPage} data={data} isLoading={loading}/>
+            <RepoCard nextPage={handleNextPage} data={data} />
           </div>
         )}
       </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/pagination.scss";
+import "../../styles/Pagination.scss";
 
 enum PageNavigation {
   FORWARD = "ADD",

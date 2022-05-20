@@ -1,61 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { IconCircleCheck } from "@tabler/icons";
 import { IconCircleDot } from "@tabler/icons";
-import { createStyles, Skeleton } from "@mantine/core";
-
-enum FilterOptions {
-  OPEN = "OPEN",
-  CLOSED = "CLOSED",
-}
+import { motion } from "framer-motion";
+import { filterAnimationProps } from "../../animations/animation";
+import { useStyles } from "./Styles";
+import { Skeleton } from "@mantine/core";
+import { FilterOptions } from "./Types";
 
 interface filterProps {
-  openIssues?: number | undefined;
-  closedIssues?: number | undefined;
   changeFilter: (e: { query: string }) => void;
+  data: any;
 }
 
-const useStyles = createStyles(() => ({
-  filter_wrapper: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  filters: {
-    display: "flex",
-    justifyContent: "space-around",
-    backgroundColor: "#fff",
-    width: "50%",
-    padding: "10px",
-
-    "&-wrapper": {
-      display: "inherit",
-      alignItems: "center",
-      cursor: "pointer",
-      color: "#57606a99",
-
-      svg: {
-        stroke: "#57606a99",
-        strokeWidth: 1,
-      },
-      "&.active": {
-        color: "#57606a;",
-        fontWeight: 500,
-
-        svg: {
-          stroke: "#57606a",
-          strokeWidth: 2,
-        },
-      },
-    },
-  },
-}));
-
-export const Filters: React.FC<filterProps> = ({
-  openIssues,
-  closedIssues,
-  changeFilter,
-}) => {
+export const Filters: React.FC<filterProps> = ({ changeFilter, data }) => {
   const styles = useStyles();
   const [activeFilter, setactiveFilter] = useState<string | null>();
+  const [loading, setloading] = useState(false);
+  const [openIssues, setOpenIssues] = useState();
+  const [closedIssues, setClosedIssues] = useState();
 
   const handleFilterClick = (filter: string) => {
     if (filter === FilterOptions.OPEN) {
@@ -71,8 +33,8 @@ export const Filters: React.FC<filterProps> = ({
   };
 
   useEffect(() => {
+    setloading(true);
     const currentFilter = window.sessionStorage.getItem("currentFilter");
-
     if (currentFilter !== null && currentFilter.length > 1) {
       setactiveFilter(currentFilter);
     } else {
@@ -81,30 +43,48 @@ export const Filters: React.FC<filterProps> = ({
     }
   }, []);
 
+  useEffect(() => {
+    if (data && data.repository) {
+      setloading(false);
+      setOpenIssues(data.repository.open_issues.totalCount);
+      setClosedIssues(data.repository.open_issues.totalCount);
+    }
+  }, [data]);
+
   return (
-    <Skeleton visible={true}>
-      <div className={styles.classes.filter_wrapper}>
+    <div className={styles.classes.filter_wrapper}>
+      <Skeleton visible={loading} style={{ width: "50%" }}>
         <div className={styles.classes.filters}>
-          <div
+          <motion.div
+            variants={filterAnimationProps}
+            initial="hidden"
+            animate="visible"
             className={`${styles.classes.filters}-wrapper ${
               activeFilter === "OPEN" ? "active" : ""
             }`}
             onClick={() => handleFilterClick("OPEN")}
           >
             <IconCircleDot color="#1a7f37" size={40} />
-            <span>{`${openIssues} Open`}</span>
-          </div>
-          <div
+            <Skeleton visible={loading} radius="xl">
+              <span>{`${openIssues} Open`}</span>
+            </Skeleton>
+          </motion.div>
+          <motion.div
+            variants={filterAnimationProps}
+            initial="hidden"
+            animate="visible"
             className={`${styles.classes.filters}-wrapper ${
               activeFilter === "CLOSED" ? "active" : ""
             }`}
             onClick={() => handleFilterClick("CLOSED")}
           >
             <IconCircleCheck color="#8250df" size={40} />
-            <span>{`${closedIssues} Closed`}</span>
-          </div>
+            <Skeleton visible={false} radius="xl">
+              <span>{`${closedIssues} Closed`}</span>
+            </Skeleton>
+          </motion.div>
         </div>
-      </div>
-    </Skeleton>
+      </Skeleton>
+    </div>
   );
 };
