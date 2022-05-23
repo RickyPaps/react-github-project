@@ -1,8 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { useQueryRepoQuery, QueryRepoQuery } from "./generated/graphql";
+import { RepoCard } from "./components/RepoCard";
 
-function App() {
+const App = () => {
+  const { data, loading, error } = useQueryRepoQuery({
+    variables: {
+      after: null,
+      before: null,
+    },
+  });
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>ERROR</div>;
+  }
+
+  if (!data) {
+    return <div>No data</div>;
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -19,8 +40,9 @@ function App() {
           Learn React
         </a>
       </header>
+      <RepoCard data={data} />
     </div>
   );
-}
+};
 
 export default App;
