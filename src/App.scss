@@ -1,5 +1,13 @@
-.app {
+html,
+body,
+#root {
   height: 100%;
+}
+
+.app {
+  overflow: auto;
+  height: auto;
+  min-height: 100%;
   text-align: center;
   background-color: #282c34;
 }

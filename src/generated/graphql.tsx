@@ -23729,6 +23729,7 @@ export type WorkflowRunPendingDeploymentRequestsArgs = {
 export type QueryRepoQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
+  query: Scalars['String'];
 }>;
 
 
@@ -23743,14 +23744,8 @@ export type QueryRepoDetailedQuery = { __typename?: 'Query', search: { __typenam
 
 
 export const QueryRepoDocument = gql`
-    query QueryRepo($after: String, $before: String) {
-  search(
-    query: "repo:reactjs/reactjs.org is:issue is:open"
-    type: ISSUE
-    last: 9
-    after: $after
-    before: $before
-  ) {
+    query QueryRepo($after: String, $before: String, $query: String!) {
+  search(query: $query, type: ISSUE, last: 9, after: $after, before: $before) {
     pageInfo {
       startCursor
       endCursor
@@ -23794,10 +23789,11 @@ export const QueryRepoDocument = gql`
  *   variables: {
  *      after: // value for 'after'
  *      before: // value for 'before'
+ *      query: // value for 'query'
  *   },
  * });
  */
-export function useQueryRepoQuery(baseOptions?: Apollo.QueryHookOptions<QueryRepoQuery, QueryRepoQueryVariables>) {
+export function useQueryRepoQuery(baseOptions: Apollo.QueryHookOptions<QueryRepoQuery, QueryRepoQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<QueryRepoQuery, QueryRepoQueryVariables>(QueryRepoDocument, options);
       }
