@@ -3,12 +3,10 @@ import { createStyles } from "@mantine/core";
 export const useStyles = createStyles(() => ({
   filter_wrapper: {
     display: "flex",
-    justifyContent: "center",
   },
   filters: {
     display: "flex",
     justifyContent: "space-around",
-    backgroundColor: "#fff",
     padding: "10px",
 
     "&-wrapper": {
@@ -16,17 +14,18 @@ export const useStyles = createStyles(() => ({
       alignItems: "center",
       cursor: "pointer",
       color: "#57606a99",
+      fontSize: "small",
 
       svg: {
         stroke: "#57606a99",
         strokeWidth: 1,
       },
       "&.active": {
-        color: "#57606a;",
+        color: "#fff",
         fontWeight: 500,
 
         svg: {
-          stroke: "#57606a",
+          stroke: "#fff",
           strokeWidth: 2,
         },
       },

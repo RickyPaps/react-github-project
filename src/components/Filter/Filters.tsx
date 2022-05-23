@@ -15,7 +15,6 @@ interface filterProps {
 export const Filters: React.FC<filterProps> = ({ changeFilter, data }) => {
   const styles = useStyles();
   const [activeFilter, setactiveFilter] = useState<string | null>();
-  const [loading, setloading] = useState(false);
   const [openIssues, setOpenIssues] = useState();
   const [closedIssues, setClosedIssues] = useState();
 
@@ -33,7 +32,6 @@ export const Filters: React.FC<filterProps> = ({ changeFilter, data }) => {
   };
 
   useEffect(() => {
-    setloading(true);
     const currentFilter = window.sessionStorage.getItem("currentFilter");
     if (currentFilter !== null && currentFilter.length > 1) {
       setactiveFilter(currentFilter);
@@ -45,46 +43,39 @@ export const Filters: React.FC<filterProps> = ({ changeFilter, data }) => {
 
   useEffect(() => {
     if (data && data.repository) {
-      setloading(false);
       setOpenIssues(data.repository.open_issues.totalCount);
-      setClosedIssues(data.repository.open_issues.totalCount);
+      setClosedIssues(data.repository.closed_issues.totalCount);
     }
   }, [data]);
 
   return (
     <div className={styles.classes.filter_wrapper}>
-      <Skeleton visible={loading} style={{ width: "50%" }}>
-        <div className={styles.classes.filters}>
-          <motion.div
-            variants={filterAnimationProps}
-            initial="hidden"
-            animate="visible"
-            className={`${styles.classes.filters}-wrapper ${
-              activeFilter === "OPEN" ? "active" : ""
-            }`}
-            onClick={() => handleFilterClick("OPEN")}
-          >
-            <IconCircleDot color="#1a7f37" size={40} />
-            <Skeleton visible={loading} radius="xl">
-              <span>{`${openIssues} Open`}</span>
-            </Skeleton>
-          </motion.div>
-          <motion.div
-            variants={filterAnimationProps}
-            initial="hidden"
-            animate="visible"
-            className={`${styles.classes.filters}-wrapper ${
-              activeFilter === "CLOSED" ? "active" : ""
-            }`}
-            onClick={() => handleFilterClick("CLOSED")}
-          >
-            <IconCircleCheck color="#8250df" size={40} />
-            <Skeleton visible={false} radius="xl">
-              <span>{`${closedIssues} Closed`}</span>
-            </Skeleton>
-          </motion.div>
-        </div>
-      </Skeleton>
+      <div className={styles.classes.filters}>
+        <motion.div
+          variants={filterAnimationProps}
+          initial="hidden"
+          animate="visible"
+          className={`${styles.classes.filters}-wrapper ${
+            activeFilter === "OPEN" ? "active" : ""
+          }`}
+          onClick={() => handleFilterClick("OPEN")}
+        >
+          <IconCircleDot color="#1a7f37" size={40} />
+          <span>{`${openIssues} Open`}</span>
+        </motion.div>
+        <motion.div
+          variants={filterAnimationProps}
+          initial="hidden"
+          animate="visible"
+          className={`${styles.classes.filters}-wrapper ${
+            activeFilter === "CLOSED" ? "active" : ""
+          }`}
+          onClick={() => handleFilterClick("CLOSED")}
+        >
+          <IconCircleCheck color="#8250df" size={40} />
+          <span>{`${closedIssues} Closed`}</span>
+        </motion.div>
+      </div>
     </div>
   );
 };

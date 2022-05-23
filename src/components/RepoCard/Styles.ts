@@ -5,6 +5,7 @@ export const useStyles = createStyles(() => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    marginLeft: "calc(100vw - 100%)",
   },
   repoCardWrapper: {
     display: "flex",

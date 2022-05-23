@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.scss";
 import { useQueryRepoQuery } from "./generated/graphql";
 import { RepoCard } from "./components/RepoCard/RepoCard";
-import { LoadingOverlay } from "@mantine/core";
+import { Burger, Header, LoadingOverlay, MediaQuery } from "@mantine/core";
 import { Filters } from "./components/Filter/Filters";
 
 interface filterProps {
@@ -41,20 +41,43 @@ const App = () => {
     });
   };
 
-  if (error) {
-    return <div>ERROR</div>;
-  }
-
   return (
     <div className="app">
-      <LoadingOverlay
-        overlayOpacity={0.3}
-        style={{ position: "fixed" }}
-        visible={loading}
-      />
       <div className="app-wrapper">
+        <LoadingOverlay
+          overlayOpacity={0.3}
+          style={{ position: "fixed" }}
+          visible={loading}
+        />
+        <Header
+          height={70}
+          p="md"
+          style={{ backgroundColor: "#353e50", border: "none" }}
+          fixed
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "end",
+              height: "100%",
+            }}
+          >
+            {/* <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+              <Burger
+                opened={false}
+                onClick={() => setOpened((o) => !o)}
+                size="sm"
+                color={theme.colors.gray[6]}
+                mr="xl"
+              />
+            </MediaQuery>
+
+            <Text>Application header</Text> */}
+            <Filters data={data} changeFilter={handleFilterChange} />
+          </div>
+        </Header>
         <img src={logo} className="app-logo" alt="logo" />
-        <Filters data={data} changeFilter={handleFilterChange} />
         {data && (
           <div>
             <RepoCard nextPage={handleNextPage} data={data} />
