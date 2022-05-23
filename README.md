@@ -10,7 +10,6 @@
 <br />
 <div align="center">
   <a href="https://github.com/RickyPaps/react-github-project">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">React Github API Dashboard</h3>
@@ -78,8 +77,8 @@ Technologies and Frameworkes used:
    ```
 4. Enter your API and Query in `.env file`
    ```js
-   REACT_APP_BASE_QUERY = 'repo:reactjs/reactjs.org is:issue is:open'
-   REACT_APP_AUTHORIZATION = 'Bearer ';
+   REACT_APP_BASE_QUERY = "repo:reactjs/reactjs.org is:issue is:open";
+   REACT_APP_AUTHORIZATION = "Bearer ";
    ```
 5. npm start!
 
