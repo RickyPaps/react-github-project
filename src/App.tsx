@@ -1,46 +1,39 @@
-import * as React from "react";
+import { useEffect } from "react";
 import logo from "./logo.svg";
-import "./App.css";
-import { useQueryRepoQuery, QueryRepoQuery } from "./generated/graphql";
+import "./App.scss";
+import { useQueryRepoQuery } from "./generated/graphql";
 import { RepoCard } from "./components/RepoCard";
+import { LoadingOverlay } from "@mantine/core";
 
 const App = () => {
-  const { data, loading, error } = useQueryRepoQuery({
+  const { data, loading, error, refetch } = useQueryRepoQuery({
     variables: {
       after: null,
       before: null,
     },
+    notifyOnNetworkStatusChange: true,
   });
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const handleNextPage = (obj: any) => {
+    refetch({
+      after: obj.currentCursors.after,
+      before: obj.currentCursors.before,
+    });
+  };
 
   if (error) {
     return <div>ERROR</div>;
   }
 
-  if (!data) {
-    return <div>No data</div>;
-  }
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <RepoCard data={data} />
+    <div className="app">
+      <LoadingOverlay styles={{ position: "fixed" }} visible={loading} />
+      {data && (
+        <div className="app-wrapper">
+          <img src={logo} className="app-logo" alt="logo" />
+          <RepoCard nextPage={handleNextPage} data={data} />
+        </div>
+      )}
     </div>
   );
 };
