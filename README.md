@@ -1,18 +1,50 @@
 <div id="top"></div>
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Don't forget to give the project a star!
+*** Thanks again! Now go create something AMAZING! :D
+-->
 
+
+
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+
+
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/RickyPaps/react-github-project">
-  </a>
+</a>
 
-  <h3 align="center">React Github API Dashboard</h3>
+<h3 align="center">React Github Dashboard</h3>
+
+  <p align="center">
+    project_description
+    <br />
+    <br />
+    <a href="https://riccardogithub.netlify.app/">View Demo</a>
+    ·
+    <a href="https://github.com/RickyPaps/react-github-project/issues">Report Bug</a>
+  </p>
+</div>
+
+
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -27,21 +59,18 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
-<!-- ABOUT THE PROJECT -->
 
+
+<!-- ABOUT THE PROJECT -->
 ## About The Project
 
 React Github Dashboard that utilizes Typescript, Mantine UI, Apollo Client, Framer motion as well as a bit of SASS.
@@ -50,19 +79,21 @@ React Github Dashboard that utilizes Typescript, Mantine UI, Apollo Client, Fram
 
 ### Built With
 
-Technologies and Frameworkes used:
-
-- [React.js](https://reactjs.org/)
-- [Mantine UI](https://mantine.dev/)
-- [SASS](https://sass-lang.com/)
-- [Apollo](https://www.apollographql.com/docs/react/)
-- [Typescript](https://www.typescriptlang.org/)
-- [GraphQL](https://graphql.org/)
-- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+* [React.js](https://reactjs.org/)
+* [Mantine UI](https://mantine.dev/)
+* [SASS](https://sass-lang.com/)
+* [Apollo](https://www.apollographql.com/docs/react/)
+* [Typescript](https://www.typescriptlang.org/)
+* [GraphQL](https://graphql.org/)
+* [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
+## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
 
 ### Installation
 
@@ -77,15 +108,15 @@ Technologies and Frameworkes used:
    ```
 4. Enter your API and Query in `.env file`
    ```js
-   REACT_APP_BASE_QUERY = "repo:reactjs/reactjs.org is:issue is:open";
-   REACT_APP_AUTHORIZATION = "Bearer ";
+   REACT_APP_BASE_QUERY = 'repo:reactjs/reactjs.org is:issue is:open';
+   REACT_APP_AUTHORIZATION = 'Bearer ';
    ```
 5. npm start!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- USAGE EXAMPLES -->
 
+<!-- ROADMAP -->
 ## Roadmap
 
 - [x] Add list of issues
@@ -96,8 +127,8 @@ Technologies and Frameworkes used:
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- CONTRIBUTING -->
 
+<!-- CONTRIBUTING -->
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -113,8 +144,9 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- ACKNOWLEDGMENTS -->
+<p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
 - [GitHub GraphQL Overview](https://docs.github.com/en/graphql/overview/explorer)
