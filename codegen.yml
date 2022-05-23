@@ -1,7 +1,7 @@
 overwrite: true
 schema: "https://api.github.com/graphql"
 headers:
-  Authorization: "Bearer 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"
+  Authorization: process.env.REACT_APP_AUTHORIZATION!
 documents: "./src/queries/**/*.{ts,tsx}"
 generates:
   src/generated/graphql.tsx:
