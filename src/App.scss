@@ -1,6 +1,5 @@
 html,
-body,
-#root {
+body {
   height: 100%;
 }
 
@@ -16,13 +15,29 @@ header {
   background-color: #353e50;
 }
 
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 92%;
+  margin: auto;
+}
+
 .app-wrapper {
   padding-bottom: 20px;
 }
 
 .app-logo {
-  height: 40vmin;
+  height: 10vmin;
   pointer-events: none;
+}
+
+.mantine-Modal-title {
+  margin: auto;
+  font-size: initial;
+  font-weight: 500;
+  text-align: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -37,5 +52,20 @@ header {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .header-wrapper {
+    width: 75%;
+  }
+
+  .mantine-Modal-title {
+    font-size: large;
+    font-weight: 500;
+  }
+
+  .app-logo {
+    height: 8vmin;
   }
 }
