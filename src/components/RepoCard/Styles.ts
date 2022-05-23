@@ -15,7 +15,7 @@ export const useStyles = createStyles(() => ({
   repoCardContainer: {
     height: "inherit",
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     flexDirection: "column",
     cursor: "pointer",
     transition: "all 1s",

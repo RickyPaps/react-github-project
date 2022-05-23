@@ -2,7 +2,7 @@ import { createStyles } from "@mantine/core";
 
 export const useStyles = createStyles(() => ({
   wrapper: {
-    padding: "20px 0",
+    padding: "20px 8px",
     display: "flex",
   },
   commentWrapper: {
@@ -10,6 +10,7 @@ export const useStyles = createStyles(() => ({
     position: "relative",
     width: "100%",
     border: "1px solid #d0d7de",
+    borderRadius: "4px",
   },
 
   commentHeader: {

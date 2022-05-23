@@ -23735,13 +23735,6 @@ export type QueryRepoQueryVariables = Exact<{
 
 export type QueryRepoQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', pageInfo: { __typename?: 'PageInfo', startCursor?: string | null, endCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean }, edges?: Array<{ __typename?: 'SearchResultItemEdge', node?: { __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue', number: number, title: string, createdAt: any, state: IssueState, closed: boolean, bodyHTML: any, author?: { __typename?: 'Bot', login: string, avatarUrl: any } | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any } | { __typename?: 'Mannequin', login: string, avatarUrl: any } | { __typename?: 'Organization', login: string, avatarUrl: any } | { __typename?: 'User', login: string, avatarUrl: any } | null, comments: { __typename?: 'IssueCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'IssueComment', bodyHTML: any, createdAt: any, author?: { __typename?: 'Bot', login: string, avatarUrl: any } | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any } | { __typename?: 'Mannequin', login: string, avatarUrl: any } | { __typename?: 'Organization', login: string, avatarUrl: any } | { __typename?: 'User', login: string, avatarUrl: any } | null } | null> | null } } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename?: 'Repository' } | { __typename?: 'User' } | null } | null> | null }, repository?: { __typename?: 'Repository', open_issues: { __typename?: 'IssueConnection', totalCount: number }, closed_issues: { __typename?: 'IssueConnection', totalCount: number } } | null };
 
-export type QueryRepoDetailedQueryVariables = Exact<{
-  queryString: Scalars['String'];
-}>;
-
-
-export type QueryRepoDetailedQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', edges?: Array<{ __typename?: 'SearchResultItemEdge', node?: { __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue', number: number, title: string, createdAt: any, state: IssueState, closed: boolean, bodyHTML: any, author?: { __typename?: 'Bot', login: string } | { __typename?: 'EnterpriseUserAccount', login: string } | { __typename?: 'Mannequin', login: string } | { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string } | null, comments: { __typename?: 'IssueCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'IssueComment', bodyHTML: any, createdAt: any, author?: { __typename?: 'Bot', login: string } | { __typename?: 'EnterpriseUserAccount', login: string } | { __typename?: 'Mannequin', login: string } | { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string } | null } | null> | null } } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename?: 'Repository' } | { __typename?: 'User' } | null } | null> | null } };
-
 
 export const QueryRepoDocument = gql`
     query QueryRepo($after: String, $before: String, $query: String!) {
@@ -23820,62 +23813,3 @@ export function useQueryRepoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<
 export type QueryRepoQueryHookResult = ReturnType<typeof useQueryRepoQuery>;
 export type QueryRepoLazyQueryHookResult = ReturnType<typeof useQueryRepoLazyQuery>;
 export type QueryRepoQueryResult = Apollo.QueryResult<QueryRepoQuery, QueryRepoQueryVariables>;
-export const QueryRepoDetailedDocument = gql`
-    query QueryRepoDetailed($queryString: String!) {
-  search(query: $queryString, type: ISSUE, first: 1) {
-    edges {
-      node {
-        ... on Issue {
-          author {
-            login
-          }
-          number
-          title
-          createdAt
-          state
-          closed
-          bodyHTML
-          comments(first: 10) {
-            totalCount
-            nodes {
-              author {
-                login
-              }
-              bodyHTML
-              createdAt
-            }
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useQueryRepoDetailedQuery__
- *
- * To run a query within a React component, call `useQueryRepoDetailedQuery` and pass it any options that fit your needs.
- * When your component renders, `useQueryRepoDetailedQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useQueryRepoDetailedQuery({
- *   variables: {
- *      queryString: // value for 'queryString'
- *   },
- * });
- */
-export function useQueryRepoDetailedQuery(baseOptions: Apollo.QueryHookOptions<QueryRepoDetailedQuery, QueryRepoDetailedQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<QueryRepoDetailedQuery, QueryRepoDetailedQueryVariables>(QueryRepoDetailedDocument, options);
-      }
-export function useQueryRepoDetailedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<QueryRepoDetailedQuery, QueryRepoDetailedQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<QueryRepoDetailedQuery, QueryRepoDetailedQueryVariables>(QueryRepoDetailedDocument, options);
-        }
-export type QueryRepoDetailedQueryHookResult = ReturnType<typeof useQueryRepoDetailedQuery>;
-export type QueryRepoDetailedLazyQueryHookResult = ReturnType<typeof useQueryRepoDetailedLazyQuery>;
-export type QueryRepoDetailedQueryResult = Apollo.QueryResult<QueryRepoDetailedQuery, QueryRepoDetailedQueryVariables>;

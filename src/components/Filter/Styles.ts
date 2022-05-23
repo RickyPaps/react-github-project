@@ -9,6 +9,10 @@ export const useStyles = createStyles(() => ({
     justifyContent: "space-around",
     padding: "10px",
 
+    "div:first-of-type": {
+      marginRight: "40px",
+    },
+
     "&-wrapper": {
       display: "inherit",
       alignItems: "center",
@@ -27,6 +31,17 @@ export const useStyles = createStyles(() => ({
         svg: {
           stroke: "#fff",
           strokeWidth: 2,
+        },
+      },
+
+      "@media (max-width: 992px)": {
+        svg: { width: "30px", height: "30px" },
+      },
+
+      "@media (min-width: 992px)": {
+        svg: {
+          width: "40px",
+          height: "40px",
         },
       },
     },

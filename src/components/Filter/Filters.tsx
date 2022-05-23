@@ -4,7 +4,6 @@ import { IconCircleDot } from "@tabler/icons";
 import { motion } from "framer-motion";
 import { filterAnimationProps } from "../../animations/animation";
 import { useStyles } from "./Styles";
-import { Skeleton } from "@mantine/core";
 import { FilterOptions } from "./Types";
 
 interface filterProps {
