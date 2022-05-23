@@ -1,9 +1,5 @@
 <div id="top"></div>
 
-[![Contributors]][contributors-url]
-[![Forks][forks-url]
-[![Stargazers][stars-url]
-[![Issues]][issues-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT LOGO -->
@@ -135,9 +131,5 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-[contributors-url]: https://github.com/RickyPaps/react-github-project/graphs/contributors
-[forks-url]: https://github.com/RickyPaps/react-github-project/network/members
-[stars-url]: https://github.com/RickyPaps/react-github-project/stargazers
-[issues-url]: https://github.com/RickyPaps/react-github-project/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/ricky-papini-427ba0146/
