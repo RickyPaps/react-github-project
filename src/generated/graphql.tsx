@@ -23733,7 +23733,7 @@ export type QueryRepoQueryVariables = Exact<{
 }>;
 
 
-export type QueryRepoQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', pageInfo: { __typename?: 'PageInfo', startCursor?: string | null, endCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean }, edges?: Array<{ __typename?: 'SearchResultItemEdge', node?: { __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue', number: number, title: string, createdAt: any, state: IssueState } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename?: 'Repository' } | { __typename?: 'User' } | null } | null> | null }, repository?: { __typename?: 'Repository', open_issues: { __typename?: 'IssueConnection', totalCount: number }, closed_issues: { __typename?: 'IssueConnection', totalCount: number } } | null };
+export type QueryRepoQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', pageInfo: { __typename?: 'PageInfo', startCursor?: string | null, endCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean }, edges?: Array<{ __typename?: 'SearchResultItemEdge', node?: { __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue', number: number, title: string, createdAt: any, state: IssueState, closed: boolean, bodyHTML: any, author?: { __typename?: 'Bot', login: string, avatarUrl: any } | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any } | { __typename?: 'Mannequin', login: string, avatarUrl: any } | { __typename?: 'Organization', login: string, avatarUrl: any } | { __typename?: 'User', login: string, avatarUrl: any } | null, comments: { __typename?: 'IssueCommentConnection', totalCount: number, nodes?: Array<{ __typename?: 'IssueComment', bodyHTML: any, createdAt: any, author?: { __typename?: 'Bot', login: string, avatarUrl: any } | { __typename?: 'EnterpriseUserAccount', login: string, avatarUrl: any } | { __typename?: 'Mannequin', login: string, avatarUrl: any } | { __typename?: 'Organization', login: string, avatarUrl: any } | { __typename?: 'User', login: string, avatarUrl: any } | null } | null> | null } } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename?: 'Repository' } | { __typename?: 'User' } | null } | null> | null }, repository?: { __typename?: 'Repository', open_issues: { __typename?: 'IssueConnection', totalCount: number }, closed_issues: { __typename?: 'IssueConnection', totalCount: number } } | null };
 
 export type QueryRepoDetailedQueryVariables = Exact<{
   queryString: Scalars['String'];
@@ -23755,11 +23755,27 @@ export const QueryRepoDocument = gql`
     edges {
       node {
         ... on Issue {
+          author {
+            login
+            avatarUrl
+          }
           number
           title
           createdAt
-          number
           state
+          closed
+          bodyHTML
+          comments(first: 10) {
+            totalCount
+            nodes {
+              author {
+                login
+                avatarUrl
+              }
+              bodyHTML
+              createdAt
+            }
+          }
         }
       }
     }

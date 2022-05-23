@@ -18,11 +18,27 @@ export const QUERY_REPO = gql`
       edges {
         node {
           ... on Issue {
+            author{
+              login
+              avatarUrl
+            }
             number
             title
             createdAt
-            number
             state
+            closed
+            bodyHTML
+            comments(first:10){
+              totalCount
+              nodes{
+                author{
+                  login
+                  avatarUrl
+                }
+                bodyHTML
+                createdAt
+              }
+            }
           }
         }
       }
