@@ -60,7 +60,7 @@ export const Filters: React.FC<filterProps> = ({ changeFilter, data }) => {
           onClick={() => handleFilterClick("OPEN")}
         >
           <IconCircleDot color="#1a7f37" size={40} />
-          <span>{`${openIssues} Open`}</span>
+          <span>{`${openIssues ? openIssues : ''} Open`}</span>
         </motion.div>
         <motion.div
           variants={filterAnimationProps}
@@ -72,7 +72,7 @@ export const Filters: React.FC<filterProps> = ({ changeFilter, data }) => {
           onClick={() => handleFilterClick("CLOSED")}
         >
           <IconCircleCheck color="#8250df" size={40} />
-          <span>{`${closedIssues} Closed`}</span>
+          <span>{`${closedIssues ? closedIssues : ''} Closed`}</span>
         </motion.div>
       </div>
     </div>
