@@ -12,15 +12,17 @@ interface QueryProps {
 
 export const RepoCard: React.FC<QueryProps> = ({ data, nextPage }) => {
   const styles = useStyles();
-  const [startCursor, setstartCursor] = useState<any>();
-  const [endCursor, setEndCursor] = useState<any>();
+  const [startCursor, setstartCursor] = useState<string>();
+  const [endCursor, setEndCursor] = useState<string>();
   const [opened, setOpened] = useState<boolean>(false);
   const [currentIssues, setCurrentIssues] = useState<Array<any>>([]);
   const [selectedIssue, setSelectedIssue] = useState();
 
   useEffect(() => {
-    setstartCursor(data.search.pageInfo.startCursor);
-    setEndCursor(data.search.pageInfo.endCursor);
+    if(data.search.pageInfo.endCursor && data.search.pageInfo.startCursor) {
+      setstartCursor(data.search.pageInfo.startCursor);
+      setEndCursor(data.search.pageInfo.endCursor);
+    }
     if (data.search.edges) {
       setCurrentIssues(data.search.edges);
     }

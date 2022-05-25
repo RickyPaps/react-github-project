@@ -1,6 +1,6 @@
 import { useState } from "react";
 import logo from "./logo.svg";
-import "./App.scss";
+import "../src/styles/App.scss";
 import { useQueryRepoQuery } from "./generated/graphql";
 import { RepoCard } from "./components/RepoCard/RepoCard";
 import { Header, LoadingOverlay } from "@mantine/core";
@@ -42,7 +42,7 @@ const App = () => {
   };
 
   return (
-    <div className="app">
+    <div className="app" data-testid="app">
       <div className="app-wrapper">
         <LoadingOverlay
           overlayOpacity={0.3}
@@ -50,6 +50,7 @@ const App = () => {
           visible={loading}
         />
         <Header
+          data-testid="navbar"
           height={70}
           p="md"
           style={{ backgroundColor: "#353e50", border: "none" }}

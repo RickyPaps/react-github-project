@@ -20,7 +20,12 @@ export const RepoCardItem = (props: QueryDataProps) => {
       animate="visible"
       className={`${className} ${styles.classes.repoCard}`}
     >
-      <Card className={styles.classes.repoCardContainer} shadow="sm" p="md">
+      <Card
+        className={styles.classes.repoCardContainer}
+        data-testid="repo-item"
+        shadow="sm"
+        p="md"
+      >
         <Card.Section style={{ marginTop: "5px" }}>
           {
             <Text weight={500} style={{ fontSize: "larger" }}>
@@ -28,7 +33,7 @@ export const RepoCardItem = (props: QueryDataProps) => {
             </Text>
           }
         </Card.Section>
-        <Card.Section>{item.title}</Card.Section>
+        <Card.Section style={{ padding: "0 10px" }}>{item.title}</Card.Section>
         <Group
           position="apart"
           style={{
