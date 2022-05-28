@@ -8,7 +8,7 @@ export const useStyles = createStyles(() => ({
   commentWrapper: {
     marginLeft: "5px",
     position: "relative",
-    width: "100%",
+    width: "max-content",
     border: "1px solid #d0d7de",
     borderRadius: "4px",
   },

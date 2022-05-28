@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import logo from "./logo.svg";
 import "../src/styles/App.scss";
 import { useQueryRepoQuery } from "./generated/graphql";
@@ -14,6 +14,7 @@ const App = () => {
   const [queryFilter, setQueryFilter] = useState(
     process.env.REACT_APP_BASE_QUERY!
   );
+  const appWrapper = useRef<HTMLDivElement>(null);
 
   const { data, loading, refetch } = useQueryRepoQuery({
     variables: {
@@ -34,6 +35,7 @@ const App = () => {
   };
 
   const handleNextPage = (obj: any) => {
+    appWrapper?.current?.scrollIntoView({ behavior: "smooth" });
     refetch({
       after: obj.currentCursors.after,
       before: obj.currentCursors.before,
@@ -42,13 +44,8 @@ const App = () => {
   };
 
   return (
-    <div className="app" data-testid="app">
+    <div className="app" data-testid="app" ref={appWrapper}>
       <div className="app-wrapper">
-        <LoadingOverlay
-          overlayOpacity={0.3}
-          style={{ position: "fixed" }}
-          visible={loading}
-        />
         <Header
           data-testid="navbar"
           height={70}
@@ -60,11 +57,20 @@ const App = () => {
             <Filters data={data} changeFilter={handleFilterChange} />
           </div>
         </Header>
-        {data && (
-          <div>
-            <RepoCard nextPage={handleNextPage} data={data} />
-          </div>
-        )}
+        <div
+          style={{
+            position: "relative",
+            paddingBottom: "20px",
+            height: loading ? "100vh" : "inherit",
+          }}
+        >
+          <LoadingOverlay
+            overlayOpacity={0.3}
+            style={{ position: "absolute" }}
+            visible={loading}
+          />
+          {data && <RepoCard nextPage={handleNextPage} data={data} />}
+        </div>
       </div>
     </div>
   );

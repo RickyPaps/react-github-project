@@ -19,7 +19,7 @@ export const RepoCard: React.FC<QueryProps> = ({ data, nextPage }) => {
   const [selectedIssue, setSelectedIssue] = useState();
 
   useEffect(() => {
-    if(data.search.pageInfo.endCursor && data.search.pageInfo.startCursor) {
+    if (data.search.pageInfo.endCursor && data.search.pageInfo.startCursor) {
       setstartCursor(data.search.pageInfo.startCursor);
       setEndCursor(data.search.pageInfo.endCursor);
     }
