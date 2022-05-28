@@ -8,6 +8,7 @@ export const useStyles = createStyles(() => ({
     marginLeft: "calc(100vw - 100%)",
   },
   repoCardWrapper: {
+    marginTop: "50px",
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
