@@ -19,9 +19,9 @@ export const RepoModal = ({ selectedModal, opened, setOpened }: any) => {
               <Comment data={selectedModal.node} />
             </div>
             <div className="comments-wrapper">
-              {selectedModal.node.comments.nodes.map((comment: any) => {
+              {selectedModal.node.comments.nodes.map((comment: any, index: number) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <Comment data={comment} />
                   </div>
                 );
