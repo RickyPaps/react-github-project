@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { IconCircleCheck } from "@tabler/icons";
 import { IconCircleDot } from "@tabler/icons";
 import { motion } from "framer-motion";
@@ -11,7 +11,8 @@ interface filterProps {
   data: any;
 }
 
-export const Filters: React.FC<filterProps> = ({ changeFilter, data }) => {
+const Filters: React.FC<filterProps> = ({ changeFilter, data }) => {
+
   const styles = useStyles();
   const [activeFilter, setactiveFilter] = useState<string | null>();
   const [openIssues, setOpenIssues] = useState();
@@ -78,3 +79,5 @@ export const Filters: React.FC<filterProps> = ({ changeFilter, data }) => {
     </div>
   );
 };
+
+export default memo(Filters)

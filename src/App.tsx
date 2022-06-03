@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import logo from "./logo.svg";
 import "../src/styles/App.scss";
 import { useQueryRepoQuery } from "./generated/graphql";
 import { RepoCard } from "./components/RepoCard/RepoCard";
 import { Header, LoadingOverlay } from "@mantine/core";
-import { Filters } from "./components/Filter/Filters";
+import Filters from "./components/Filter/Filters";
 
 interface filterProps {
   query: string;
@@ -25,23 +25,23 @@ const App = () => {
     notifyOnNetworkStatusChange: true,
   });
 
-  const handleFilterChange = (obj: filterProps) => {
+  const handleFilterChange = useCallback((obj: filterProps) => {
     setQueryFilter(obj.query);
     refetch({
       after: null,
       before: null,
       query: obj.query,
     });
-  };
+  },[refetch]);
 
-  const handleNextPage = (obj: any) => {
+  const handleNextPage = useCallback((obj: any) => {
     appWrapper?.current?.scrollIntoView({ behavior: "smooth" });
     refetch({
       after: obj.currentCursors.after,
       before: obj.currentCursors.before,
       query: queryFilter,
     });
-  };
+  }, [queryFilter, refetch]);
 
   return (
     <div className="app" data-testid="app" ref={appWrapper}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { QueryRepoQuery } from "../../generated/graphql";
 import { RepoModal } from "../Modal/Modal";
-import { Pagination } from "../Pagination/Pagination";
+import Pagination from "../Pagination/Pagination";
 import { RepoCardItem } from "./RepoCardItem";
 import { useStyles } from "./Styles";
 

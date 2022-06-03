@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import "../../styles/pagination.scss";
 
 enum PageNavigation {
@@ -14,7 +14,7 @@ interface PaginationProps {
   hasPrevious: any;
 }
 
-export const Pagination: React.FC<PaginationProps> = ({
+const Pagination: React.FC<PaginationProps> = ({
   startCursor,
   endCursor,
   nextPage,
@@ -59,3 +59,5 @@ export const Pagination: React.FC<PaginationProps> = ({
     </div>
   );
 };
+
+export default memo(Pagination)
