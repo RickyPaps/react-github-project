@@ -49,6 +49,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+**API needs to be updated
+
 React Github Dashboard that utilizes Typescript, Mantine UI, Apollo Client, Framer motion as well as a bit of SASS.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
